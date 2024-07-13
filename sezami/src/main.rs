@@ -1,0 +1,17 @@
+use druid::widget::{Label, Button};
+use druid::{AppLauncher, LocalizedString, PlatformError, Widget, WindowDesc};
+
+fn main() -> Result<(), PlatformError> {
+	//Create Window Desc
+	let main_window = WindowDesc::new(build_ui).title(LocalizedString::new("Sezami")).window_size((300.0, 150.0));
+	
+	//Launch App
+	AppLauncher::with_window(main_window).use_simple_logger().launch("Testing Druid interface !".to_string())?;
+    Ok(())
+}
+
+fn build_ui() -> impl Widget<String> {
+    let layout = druid::widget::Flex::column();
+	
+    layout
+}
