@@ -1,6 +1,9 @@
 use druid::widget::{Label, Button};
 use druid::{AppLauncher, LocalizedString, PlatformError, Widget, WindowDesc};
 
+mod widgets;
+use crate::widgets::TextEditField::TextEditField;
+
 fn main() -> Result<(), PlatformError> {
 	//Create Window Desc
 	let main_window = WindowDesc::new(build_ui).title(LocalizedString::new("Sezami")).window_size((300.0, 150.0));
@@ -11,7 +14,8 @@ fn main() -> Result<(), PlatformError> {
 }
 
 fn build_ui() -> impl Widget<String> {
-    let layout = druid::widget::Flex::column();
+    let layout = druid::widget::Flex::column()
+	.with_child(TextEditField);
 	
     layout
 }
