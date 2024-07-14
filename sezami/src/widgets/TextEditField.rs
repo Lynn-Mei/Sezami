@@ -1,17 +1,18 @@
 use druid::kurbo::Circle;
 use druid::piet::{Color, RenderContext, Text, TextLayoutBuilder};
 use druid::widget::prelude::*;
-//use druid::{AppLauncher, Widget, WindowDesc, Data, Lens, Env, , EventCtx, LifeCycle, LifeCycleCtx, PaintCtx, UpdateCtx, LocalizedString, PlatformError};
 use druid::{AppLauncher, Data, Env, Event, EventCtx, FontDescriptor, FontFamily, Lens,LifeCycle,LifeCycleCtx, LocalizedString, PaintCtx,PlatformError, TextLayout, UpdateCtx, Widget, WidgetExt, WindowDesc};
 
 pub struct TextEditField {
+	width: f64,
+	height: f64,
 	text: String,
 	font_size: f64,
 }
 
 impl TextEditField {
-	pub fn new(text: String, font_size : f64) -> Self {
-		Self { text, font_size }
+	pub fn new(width: f64, height: f64, text: String, font_size: f64) -> Self {
+		Self { width, height, text, font_size }
 	}
 }
 
@@ -19,7 +20,7 @@ impl Widget<String> for TextEditField {
 	// Paints the widget on the screen
 	fn paint(&mut self, ctx: &mut PaintCtx, data: &String, env: &Env) {
 		// Drawing a circle with white background as example
-		let fill_color = Color::rgba8(0x7F, 0x7F, 0x7F, 0x7F);
+		let fill_color = Color::rgb(0.0, 0.0, 0.0);
 		let mut text_layout = TextLayout::<String>::from_text(self.text.clone());
 		text_layout.set_font(FontDescriptor::new(FontFamily::SERIF).with_size(12.0));
 		text_layout.set_text_color(fill_color);
@@ -33,7 +34,7 @@ impl Widget<String> for TextEditField {
 	
 	// Defines the size of the text edit field
 	fn layout(&mut self, ctx: &mut LayoutCtx, bc: &BoxConstraints, data: &String, env: &Env) -> Size {
-		Size::new(50.0, 50.0)
+		Size::new(self.width , self.height)
 	}
 	
 	// Handles lifecycle events
