@@ -14,8 +14,9 @@ fn main() -> Result<(), PlatformError> {
 }
 
 fn build_ui() -> impl Widget<String> {
+	let text_edit_field = TextEditField::new("Hello World".to_string(), 12.0);
     let layout = druid::widget::Flex::column()
-	.with_child(TextEditField);
+	.with_child(text_edit_field);
 	
     layout
 }

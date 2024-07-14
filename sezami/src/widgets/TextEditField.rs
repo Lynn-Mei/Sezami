@@ -4,14 +4,23 @@ use druid::widget::prelude::*;
 //use druid::{AppLauncher, Widget, WindowDesc, Data, Lens, Env, , EventCtx, LifeCycle, LifeCycleCtx, PaintCtx, UpdateCtx, LocalizedString, PlatformError};
 use druid::{AppLauncher, Data, Env, Event, EventCtx, FontDescriptor, FontFamily, Lens,LifeCycle,LifeCycleCtx, LocalizedString, PaintCtx,PlatformError, TextLayout, UpdateCtx, Widget, WidgetExt, WindowDesc};
 
-pub struct TextEditField;
+pub struct TextEditField {
+	text: String,
+	font_size: f64,
+}
+
+impl TextEditField {
+	pub fn new(text: String, font_size : f64) -> Self {
+		Self { text, font_size }
+	}
+}
 
 impl Widget<String> for TextEditField {
 	// Paints the widget on the screen
 	fn paint(&mut self, ctx: &mut PaintCtx, data: &String, env: &Env) {
 		// Drawing a circle with white background as example
 		let fill_color = Color::rgba8(0x7F, 0x7F, 0x7F, 0x7F);
-		let mut text_layout = TextLayout::<String>::from_text("Test Placeholder");
+		let mut text_layout = TextLayout::<String>::from_text(self.text.clone());
 		text_layout.set_font(FontDescriptor::new(FontFamily::SERIF).with_size(12.0));
 		text_layout.set_text_color(fill_color);
 		text_layout.rebuild_if_needed(ctx.text(), env);
